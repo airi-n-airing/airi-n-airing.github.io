@@ -5,11 +5,11 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
   background: url('images/hololive-style-bg.jpg') no-repeat center center fixed;
   background-size: cover;
-  color: #333;
+  color: #fff;
   line-height: 1.6;
 }
 
-/* コンテンツ用のボックス */
+/* コンテンツボックス */
 .container {
   background-color: rgba(255, 255, 255, 0.85);
   color: #222;
@@ -20,8 +20,22 @@ body {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
+/* ヘッダー整形 */
+h1, h2 {
+  text-align: center;
+}
+
+/* リストの左余白 */
+ul {
+  padding-left: 1.2em;
+}
+
 /* レスポンシブ対応 */
 @media (max-width: 600px) {
+  body {
+    padding: 0.5em;
+  }
+
   .container {
     padding: 1em;
     margin: 1em;
