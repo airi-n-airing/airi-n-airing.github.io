@@ -68,6 +68,12 @@
       margin-top: 1em;
     }
 
+    /* コピー時のハイライト */
+    .copied {
+      background-color: #ffb366;
+      transition: background-color 0.5s;
+    }
+
     @media (max-width: 600px) {
       .container {
         padding: 1em;
@@ -94,6 +100,8 @@
       <button class="tab-button" data-tab="jpop">J-POP</button>
       <button class="tab-button" data-tab="vocaloid">ボカロ系・その他</button>
     </div>
+    
+    曲名をタップするとコピーできます
 
     <!-- ホロライブ -->
     <div class="tab-content active" id="hololive">
@@ -346,6 +354,9 @@
 
       <div class="back-to-top"><a href="#top">▲ トップへ戻る</a></div>
     </div>
+    
+    <div id="msg" style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#333;color:#fff;padding:10px 20px;border-radius:8px;">コピーしました！</div>
+    
   </div>
 
   <script>
@@ -360,6 +371,26 @@
         btn.classList.add('active');
         document.getElementById(btn.dataset.tab).classList.add('active');
       });
+    });
+
+    function copy(el) {
+      navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+        // ハイライト表示
+        el.classList.add("copied");
+        setTimeout(() => {
+          el.classList.remove("copied");
+        }, 2000);
+
+        // メッセージ表示
+        const msg = document.getElementById("msg");
+        msg.style.display = "block";
+        setTimeout(() => msg.style.display = "none", 1500);
+      });
+    }
+  
+    // li要素をすべて取得してクリックイベントを付与
+    document.querySelectorAll("li").forEach(li => {
+      li.addEventListener("click", () => copy(li));
     });
   </script>
 </body>
